@@ -1,88 +1,96 @@
 /* ============================================================
-   Doctor Alliance · Monthly Client Impact Report
+   Doctor Alliance · Monthly Client Impact Report — Editorial Edition
    ------------------------------------------------------------
    TO CREATE A NEW MONTHLY REPORT:
    Edit ONLY the `clientData` object below, then open index.html.
-   Any metric left as `null` (or an empty array) is automatically
-   hidden — nothing displays as a fake zero.
+
+   The schema below is intentionally array-based (not fixed keys),
+   so you can add, remove, or reorder items freely per client and
+   per month — nothing about the layout needs to change. Any
+   section left empty (empty array, null amount, businessImpact
+   disabled, etc.) is automatically hidden.
    ============================================================ */
 
 const clientData = {
+
   clientName: "Meridian Family Physicians",
-  reportingPeriod: "July 2026",
+  reportingPeriod: "July 2026",     // used for the browser tab title
+  heroLabel: "July in Review",      // the big line under "Doctor Alliance" in the hero
+  impactStatement: "Streamlining documentation, coordinating care, and supporting measurable operational impact.",
 
-  executiveSummary: {
-    headline: "Doctor Alliance coordinated documentation and care management across three locations this month, keeping every physician's order queue current and every enrolled patient monitored without a single missed follow-up."
-  },
-
-  metrics: {
-    ordersProcessed: 412,
-    patientsSupported: 268,
-    facilitiesCoordinated: 3,
-    physiciansSupported: 9,
-    documentationAccuracy: 99.2,   // percent
-    physicianSignOffRate: 96.5,    // percent
-    cpoMinutes: 5140,
-    billableEncounters: null       // left null on purpose -> hidden (rolled into revenue section instead)
-  },
-
-  workflow: {
-    ordersReceived: 438,
-    ordersProcessed: 412,
-    ordersSentForSignature: 401,
-    ordersSigned: 388,
-    ordersCompleted: 379
-  },
-
-  operational: [
-    { label: "Patients coordinated", value: 268 },
-    { label: "Facilities supported", value: 3 },
-    { label: "Physicians supported", value: 9 },
-    { label: "Follow-ups completed", value: 154 },
-    { label: "Escalations resolved", value: 11 }
+  /* SECTION 2 — Month at a glance
+     Mark exactly one metric `primary: true` to make it the large
+     lead figure. Everything else renders at a shared secondary size.
+     `format` can be "number" or "percent". */
+  metrics: [
+    { label: "Orders Processed", value: 412, format: "number", primary: true },
+    { label: "Patients Supported", value: 268, format: "number" },
+    { label: "Documentation Accuracy", value: 99.2, format: "percent" },
+    { label: "Minutes Captured", value: 5140, format: "number" },
+    { label: "Physician Sign-Off Rate", value: 96.5, format: "percent" }
   ],
 
+  /* SECTION 3 — Behind the numbers */
+  operationalStory: {
+    narrative: "Across three facilities and nine physicians, Doctor Alliance managed the monthly documentation workflow end to end and completed 154 proactive follow-ups before anything came due.",
+    stats: [
+      { label: "Facilities coordinated", value: "3" },
+      { label: "Physicians supported", value: "9" },
+      { label: "Follow-ups completed", value: "154" },
+      { label: "Escalations resolved", value: "11" }
+    ]
+  },
+
+  /* SECTION 4 — Workflow journey (ordered; hides any stage left blank) */
+  workflow: [
+    { label: "Received", value: 438 },
+    { label: "Processed", value: 412 },
+    { label: "Sent for Signature", value: 401 },
+    { label: "Signed", value: 388 },
+    { label: "Completed", value: 379 }
+  ],
+
+  /* SECTION 5 — What we took off your team's plate */
   valueDelivered: [
-    "Coordinated communication with agencies and facilities on outstanding documentation",
-    "Managed end-to-end order workflows across all three locations",
-    "Followed up on outstanding documentation before it aged past 5 days",
-    "Assisted with physician coordination on CPO care plan reviews",
-    "Resolved workflow escalations flagged by front-office staff",
-    "Identified service opportunities for two under-enrolled patient panels"
+    { title: "Coordination", description: "Agency communication and outstanding documentation management across all three locations." },
+    { title: "Workflow Management", description: "End-to-end order coordination from intake through physician sign-off." },
+    { title: "Proactive Follow-Up", description: "Outstanding documentation addressed before it became overdue." },
+    { title: "Physician Support", description: "Coordination on CPO care plan reviews across nine providers." },
+    { title: "Escalation Handling", description: "Workflow escalations flagged by front-office staff resolved same-week." },
+    { title: "Opportunity Identification", description: "Two under-enrolled patient panels flagged for expanded service." }
   ],
 
-  highlights: [
-    "Documentation accuracy held at 99.2%, ahead of the group's target for the third straight month.",
-    "Physician sign-off turnaround improved by 1.4 days on average across all nine providers.",
-    "Zero enrolled RPM patients went without a monitored reading this month.",
-    "Two new service opportunities identified for panels with low CCM enrollment."
-  ],
-
-  nextMonthFocus: [
-    "Expand CPO enrollment outreach to the two identified under-enrolled panels",
-    "Tighten sign-off turnaround further for the two newest onboarded physicians",
-    "Review escalation patterns at the Northgate location to reduce recurring causes"
-  ],
-
-  revenue: {
+  /* SECTION 6 — Business impact (optional; set enabled:false to hide entirely) */
+  businessImpact: {
     enabled: true,
-    label: "Billed Revenue",
+    title: "Business Impact",
     amount: 18420,
-    billableEncounters: 214,
+    amountLabel: "Billed Revenue Supported",
+    encounters: 214,
+    encountersLabel: "Billable Encounters",
     codes: [
       { code: "G0179", description: "Physician recertification", count: 92, amount: 4140 },
       { code: "G0180", description: "Physician certification", count: 38, amount: 2280 },
       { code: "G0181", description: "Care plan oversight, 30 min", count: 84, amount: 12000 }
-    ],
-    monthlyTrend: [
-      { label: "Feb", amount: 14200 },
-      { label: "Mar", amount: 15100 },
-      { label: "Apr", amount: 16050 },
-      { label: "May", amount: 15700 },
-      { label: "Jun", amount: 17300 },
-      { label: "Jul", amount: 18420 }
     ]
-  }
+  },
+
+  /* SECTION 7 — Monthly highlights (first item renders larger) */
+  highlights: [
+    "99.2% documentation accuracy maintained for the third consecutive month.",
+    "Physician sign-off turnaround improved across all nine providers.",
+    "Zero enrolled RPM patients went without a monitored reading this month.",
+    "Two new service opportunities identified for under-enrolled panels."
+  ],
+
+  /* SECTION 8 — Looking ahead */
+  nextMonthFocus: [
+    "Expand CPO opportunity identification across the two flagged panels",
+    "Improve physician sign-off turnaround for the newest onboarded providers",
+    "Review recurring workflow escalations at the Northgate location"
+  ],
+
+  footerNote: "Supporting clinical teams through operational coordination, documentation management, and measurable service impact."
 };
 
 /* ============================================================
@@ -94,7 +102,7 @@ const hasValue = (v) => v !== null && v !== undefined && v !== "" &&
 
 const fmtNumber = (n) => Number(n).toLocaleString("en-US");
 const fmtCurrency = (n) => Number(n).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-const fmtPercent = (n) => `${Number(n)}%`;
+const fmtMetric = (m) => m.format === "percent" ? `${m.value}<span class="glance__unit">%</span>` : fmtNumber(m.value);
 
 function el(tag, className, html){
   const node = document.createElement(tag);
@@ -103,130 +111,110 @@ function el(tag, className, html){
   return node;
 }
 
-function renderHeader(data){
-  document.getElementById("hdr-period").textContent = data.reportingPeriod || "";
-  document.getElementById("hdr-client").textContent = data.clientName || "";
-  const headline = data.executiveSummary && data.executiveSummary.headline;
-  const headlineEl = document.getElementById("hdr-headline");
-  if (hasValue(headline)) {
-    headlineEl.textContent = headline;
+function renderHero(data){
+  document.title = `Doctor Alliance · ${data.clientName || "Client"} — ${data.reportingPeriod || ""}`;
+  document.getElementById("hero-review").textContent = data.heroLabel || "";
+  document.getElementById("hero-client").textContent = data.clientName || "";
+  const statementEl = document.getElementById("hero-statement");
+  if (hasValue(data.impactStatement)) {
+    statementEl.textContent = data.impactStatement;
   } else {
-    headlineEl.remove();
+    statementEl.remove();
   }
 }
 
-function renderKPIs(metrics){
-  const grid = document.getElementById("kpi-grid");
-  const defs = [
-    { key: "ordersProcessed", label: "Orders processed" },
-    { key: "patientsSupported", label: "Patients supported" },
-    { key: "facilitiesCoordinated", label: "Facilities coordinated" },
-    { key: "physiciansSupported", label: "Physicians supported" },
-    { key: "documentationAccuracy", label: "Documentation accuracy", unit: "%" },
-    { key: "physicianSignOffRate", label: "Physician sign-off rate", unit: "%" },
-    { key: "cpoMinutes", label: "CPO minutes captured" },
-    { key: "billableEncounters", label: "Billable encounters" }
-  ];
-
-  let count = 0;
-  defs.forEach(def => {
-    const val = metrics[def.key];
-    if (!hasValue(val)) return;
-    count++;
-    const card = el("div", "kpi-card");
-    const valueLine = el("div", "kpi-card__value",
-      `${fmtNumber(val)}${def.unit ? `<span class="kpi-card__unit">${def.unit}</span>` : ""}`);
-    const label = el("div", "kpi-card__label", def.label);
-    card.appendChild(valueLine);
-    card.appendChild(label);
-    grid.appendChild(card);
-  });
-
-  if (count === 0) document.getElementById("section-kpis").hidden = true;
-}
-
-function renderOperational(items){
-  const grid = document.getElementById("ops-grid");
-  const valid = (items || []).filter(i => hasValue(i.value));
+function renderGlance(metrics){
+  const grid = document.getElementById("glance-grid");
+  const valid = (metrics || []).filter(m => hasValue(m.value));
   if (valid.length === 0){
-    document.getElementById("section-ops").hidden = true;
+    document.getElementById("section-glance").remove();
     return;
   }
-  const max = Math.max(...valid.map(i => Number(i.value)));
-  valid.forEach(item => {
-    const card = el("div", "ops-card");
-    const row = el("div", "ops-card__row");
-    row.appendChild(el("span", "ops-card__label", item.label));
-    row.appendChild(el("span", "ops-card__value", fmtNumber(item.value)));
-    card.appendChild(row);
-    const bar = el("div", "ops-card__bar");
-    const fill = el("div", "ops-card__bar-fill");
-    const pct = max > 0 ? Math.max(6, Math.round((Number(item.value) / max) * 100)) : 0;
-    fill.style.width = `${pct}%`;
-    bar.appendChild(fill);
-    card.appendChild(bar);
-    grid.appendChild(card);
+  valid.forEach(m => {
+    const item = el("div", `glance__item${m.primary ? " glance__item--primary" : ""}`);
+    item.appendChild(el("div", "glance__value", fmtMetric(m)));
+    item.appendChild(el("div", "glance__label", m.label));
+    grid.appendChild(item);
   });
 }
 
-function renderWorkflow(workflow){
-  const rail = document.getElementById("workflow-rail");
-  const stages = [
-    { key: "ordersReceived", label: "Received" },
-    { key: "ordersProcessed", label: "Processed" },
-    { key: "ordersSentForSignature", label: "Sent for signature" },
-    { key: "ordersSigned", label: "Signed" },
-    { key: "ordersCompleted", label: "Completed" }
-  ];
-  const valid = stages.filter(s => hasValue(workflow[s.key]));
-  if (valid.length === 0){
-    document.getElementById("section-workflow").hidden = true;
+function renderStory(story){
+  if (!story || !hasValue(story.narrative)){
+    document.getElementById("section-story").remove();
     return;
   }
-  valid.forEach((stage, i) => {
-    const node = el("div", "workflow-stage");
-    node.appendChild(el("div", "workflow-stage__node", String(i + 1)));
-    node.appendChild(el("div", "workflow-stage__value", fmtNumber(workflow[stage.key])));
-    node.appendChild(el("div", "workflow-stage__label", stage.label));
-    rail.appendChild(node);
+  document.getElementById("story-narrative").textContent = story.narrative;
+  const statsWrap = document.getElementById("story-stats");
+  if (hasValue(story.stats)){
+    story.stats.forEach(s => {
+      const row = el("div", "story-stat");
+      row.appendChild(el("span", "story-stat__label", s.label));
+      row.appendChild(el("span", "story-stat__value", s.value));
+      statsWrap.appendChild(row);
+    });
+  } else {
+    statsWrap.remove();
+  }
+}
+
+function renderJourney(stages){
+  const track = document.getElementById("journey-track");
+  const valid = (stages || []).filter(s => hasValue(s.value));
+  if (valid.length === 0){
+    document.getElementById("section-journey").remove();
+    return;
+  }
+  valid.forEach(stage => {
+    const node = el("div", "journey-stage");
+    node.appendChild(el("div", "journey-stage__dot"));
+    node.appendChild(el("div", "journey-stage__value", fmtNumber(stage.value)));
+    node.appendChild(el("div", "journey-stage__label", stage.label));
+    track.appendChild(node);
   });
 }
 
-function renderValueDelivered(items){
-  const list = document.getElementById("value-list");
+function renderPlate(items){
+  const list = document.getElementById("plate-list");
   if (!hasValue(items)){
-    document.getElementById("section-value").hidden = true;
+    document.getElementById("section-plate").remove();
     return;
   }
-  items.forEach(text => list.appendChild(el("li", null, text)));
+  items.forEach(item => {
+    const card = el("div", "plate-item");
+    card.appendChild(el("p", "plate-item__title", item.title));
+    card.appendChild(el("p", "plate-item__desc", item.description));
+    list.appendChild(card);
+  });
 }
 
-function renderRevenue(revenue){
-  const section = document.getElementById("section-revenue");
-  if (!revenue || !revenue.enabled || !hasValue(revenue.amount)){
-    section.hidden = true;
+function renderImpact(impact){
+  const section = document.getElementById("section-impact");
+  if (!impact || !impact.enabled || !hasValue(impact.amount)){
+    section.remove();
     return;
   }
   section.hidden = false;
 
-  document.getElementById("revenue-title").textContent = revenue.label
-    ? `Revenue & services — ${revenue.label}`
-    : "Revenue & services";
+  document.getElementById("impact-title").textContent = impact.title || "Business Impact";
+  document.getElementById("impact-amount").textContent = fmtCurrency(impact.amount);
 
-  const summary = document.getElementById("revenue-summary");
-  summary.appendChild(el("div", "revenue-summary__label", revenue.label || "Revenue"));
-  summary.appendChild(el("div", "revenue-summary__amount", fmtCurrency(revenue.amount)));
-  if (hasValue(revenue.billableEncounters)){
-    summary.appendChild(el("div", "revenue-summary__sub", `${fmtNumber(revenue.billableEncounters)} billable encounters`));
+  const subEl = document.getElementById("impact-sub");
+  const subParts = [];
+  if (hasValue(impact.amountLabel)) subParts.push(impact.amountLabel);
+  if (hasValue(impact.encounters)) subParts.push(`${fmtNumber(impact.encounters)} ${impact.encountersLabel || "encounters"}`);
+  if (subParts.length){
+    subEl.textContent = subParts.join(" · ");
+  } else {
+    subEl.remove();
   }
 
-  const codesWrap = document.getElementById("revenue-codes");
-  if (hasValue(revenue.codes)){
+  const tableWrap = document.getElementById("impact-table-wrap");
+  if (hasValue(impact.codes)){
     const table = el("table");
     table.innerHTML = `
       <thead><tr><th>Code</th><th>Description</th><th>Count</th><th>Amount</th></tr></thead>
       <tbody>
-        ${revenue.codes.map(c => `
+        ${impact.codes.map(c => `
           <tr>
             <td>${c.code}</td>
             <td>${c.description || ""}</td>
@@ -234,53 +222,74 @@ function renderRevenue(revenue){
             <td>${fmtCurrency(c.amount)}</td>
           </tr>`).join("")}
       </tbody>`;
-    codesWrap.appendChild(table);
+    tableWrap.appendChild(table);
   } else {
-    codesWrap.remove();
-  }
-
-  const trendWrap = document.getElementById("revenue-trend");
-  if (hasValue(revenue.monthlyTrend)){
-    const max = Math.max(...revenue.monthlyTrend.map(p => Number(p.amount)));
-    revenue.monthlyTrend.forEach(point => {
-      const pct = max > 0 ? Math.max(6, Math.round((Number(point.amount) / max) * 100)) : 0;
-      const bar = el("div", "trend-bar");
-      bar.style.height = `${pct}%`;
-      bar.appendChild(el("span", "trend-bar__label", point.label));
-      trendWrap.appendChild(bar);
-    });
-  } else {
-    trendWrap.remove();
+    tableWrap.remove();
   }
 }
 
 function renderHighlights(items){
-  const grid = document.getElementById("highlight-grid");
+  const grid = document.getElementById("highlights-grid");
   if (!hasValue(items)){
-    document.getElementById("section-highlights").hidden = true;
+    document.getElementById("section-highlights").remove();
     return;
   }
-  items.forEach(text => grid.appendChild(el("div", "highlight-card", text)));
+  items.forEach(text => {
+    const quote = el("div", "highlight-quote");
+    quote.appendChild(el("p", "highlight-quote__text", text));
+    grid.appendChild(quote);
+  });
 }
 
-function renderNextMonth(items){
-  const list = document.getElementById("next-list");
+function renderAhead(items){
+  const list = document.getElementById("ahead-list");
   if (!hasValue(items)){
-    document.getElementById("section-next").hidden = true;
+    document.getElementById("section-ahead").remove();
     return;
   }
-  items.forEach(text => list.appendChild(el("li", null, text)));
+  items.forEach(text => {
+    const li = document.createElement("li");
+    li.appendChild(el("span", "ahead-text", text));
+    list.appendChild(li);
+  });
+}
+
+function renderFooter(note){
+  const el = document.getElementById("footer-note");
+  if (hasValue(note)) {
+    el.textContent = note;
+  } else {
+    el.remove();
+  }
 }
 
 function renderReport(data){
-  renderHeader(data);
-  renderKPIs(data.metrics || {});
-  renderOperational(data.operational || []);
-  renderWorkflow(data.workflow || {});
-  renderValueDelivered(data.valueDelivered || []);
-  renderRevenue(data.revenue || {});
+  renderHero(data);
+  renderGlance(data.metrics || []);
+  renderStory(data.operationalStory || {});
+  renderJourney(data.workflow || []);
+  renderPlate(data.valueDelivered || []);
+  renderImpact(data.businessImpact || {});
   renderHighlights(data.highlights || []);
-  renderNextMonth(data.nextMonthFocus || []);
+  renderAhead(data.nextMonthFocus || []);
+  renderFooter(data.footerNote);
+}
+
+function initScrollReveal(){
+  const sections = document.querySelectorAll(".fade-section");
+  if (!("IntersectionObserver" in window)){
+    sections.forEach(s => s.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+  sections.forEach(s => observer.observe(s));
 }
 
 function initControls(){
@@ -292,5 +301,6 @@ function initControls(){
 
 document.addEventListener("DOMContentLoaded", () => {
   renderReport(clientData);
+  initScrollReveal();
   initControls();
 });
