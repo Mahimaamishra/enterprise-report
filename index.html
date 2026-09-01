@@ -13,75 +13,86 @@
     <button id="btn-pdf" class="ctrl-btn ctrl-btn--primary" type="button">Download as PDF</button>
   </div>
 
-  <main class="sheet" id="sheet">
+  <!-- SECTION 1 — HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__inner">
+      <p class="hero__brand reveal" style="--d:0">Doctor Alliance</p>
+      <h1 class="hero__title">
+        <span class="reveal" style="--d:1" id="hero-review"></span><br>
+        <span class="reveal hero__client" style="--d:2" id="hero-client"></span>
+      </h1>
+      <p class="hero__statement reveal" style="--d:3" id="hero-statement"></p>
+    </div>
+  </section>
 
-    <!-- HEADER -->
-    <header class="masthead">
-      <div class="masthead__top">
-        <span class="masthead__brand">Doctor Alliance</span>
-        <span class="masthead__period" id="hdr-period"></span>
+  <!-- SECTION 2 — MONTH AT A GLANCE -->
+  <section class="glance fade-section" id="section-glance">
+    <div class="wrap">
+      <p class="eyebrow">Month at a glance</p>
+      <div class="glance__grid" id="glance-grid"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — BEHIND THE NUMBERS -->
+  <section class="story fade-section" id="section-story">
+    <div class="wrap story__layout">
+      <div class="story__narrative">
+        <p class="eyebrow">Behind the numbers</p>
+        <p class="story__text" id="story-narrative"></p>
       </div>
-      <div class="masthead__rule"></div>
-      <div class="masthead__title-block">
-        <p class="masthead__eyebrow">Monthly Client Impact Report</p>
-        <h1 class="masthead__client" id="hdr-client"></h1>
-        <p class="masthead__headline" id="hdr-headline"></p>
+      <div class="story__stats" id="story-stats"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — WORKFLOW JOURNEY -->
+  <section class="journey fade-section" id="section-journey">
+    <div class="wrap">
+      <p class="eyebrow">Workflow journey</p>
+      <div class="journey__track" id="journey-track"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — VALUE DELIVERED -->
+  <section class="plate fade-section" id="section-plate">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">What we took off your team's plate</p>
+      <div class="plate__list" id="plate-list"></div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — BUSINESS IMPACT (conditional) -->
+  <section class="impact fade-section" id="section-impact" hidden>
+    <div class="wrap impact__layout">
+      <div class="impact__figure">
+        <p class="eyebrow" id="impact-title">Business impact</p>
+        <div class="impact__amount" id="impact-amount"></div>
+        <div class="impact__sub" id="impact-sub"></div>
       </div>
-    </header>
+      <div class="impact__table-wrap" id="impact-table-wrap"></div>
+    </div>
+  </section>
 
-    <!-- EXECUTIVE SNAPSHOT -->
-    <section class="section" id="section-kpis">
-      <h2 class="section__title">Executive snapshot</h2>
-      <div class="kpi-grid" id="kpi-grid"></div>
-    </section>
+  <!-- SECTION 7 — MONTHLY HIGHLIGHTS -->
+  <section class="highlights fade-section" id="section-highlights">
+    <div class="wrap">
+      <p class="eyebrow">Monthly highlights</p>
+      <div class="highlights__grid" id="highlights-grid"></div>
+    </div>
+  </section>
 
-    <!-- OPERATIONAL PERFORMANCE -->
-    <section class="section" id="section-ops">
-      <h2 class="section__title">Operational performance</h2>
-      <div class="ops-grid" id="ops-grid"></div>
-    </section>
+  <!-- SECTION 8 — LOOKING AHEAD -->
+  <section class="ahead fade-section" id="section-ahead">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--light">Looking ahead</p>
+      <ol class="ahead__list" id="ahead-list"></ol>
+    </div>
+  </section>
 
-    <!-- WORKFLOW ACTIVITY -->
-    <section class="section" id="section-workflow">
-      <h2 class="section__title">Workflow activity</h2>
-      <div class="workflow-rail" id="workflow-rail"></div>
-    </section>
-
-    <!-- VALUE DELIVERED -->
-    <section class="section" id="section-value">
-      <h2 class="section__title">Value delivered this month</h2>
-      <ul class="value-list" id="value-list"></ul>
-    </section>
-
-    <!-- REVENUE (conditional) -->
-    <section class="section" id="section-revenue" hidden>
-      <h2 class="section__title" id="revenue-title">Revenue &amp; services</h2>
-      <div class="revenue-block">
-        <div class="revenue-summary" id="revenue-summary"></div>
-        <div class="revenue-codes" id="revenue-codes"></div>
-        <div class="revenue-trend" id="revenue-trend"></div>
-      </div>
-    </section>
-
-    <!-- HIGHLIGHTS -->
-    <section class="section" id="section-highlights">
-      <h2 class="section__title">Monthly highlights</h2>
-      <div class="highlight-grid" id="highlight-grid"></div>
-    </section>
-
-    <!-- NEXT MONTH FOCUS -->
-    <section class="section" id="section-next">
-      <h2 class="section__title">Next month focus</h2>
-      <ol class="next-list" id="next-list"></ol>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="report-footer">
-      <p class="report-footer__brand">Doctor Alliance <span class="dot">·</span> Confidential</p>
-      <p class="report-footer__note">Supporting clinical teams through operational coordination, documentation management, and measurable service impact.</p>
-    </footer>
-
-  </main>
+  <!-- FOOTER -->
+  <footer class="report-footer">
+    <p class="report-footer__brand">Doctor Alliance <span class="dot">·</span> Confidential</p>
+    <p class="report-footer__note" id="footer-note"></p>
+  </footer>
 
 <script src="script.js"></script>
 </body>
