@@ -1,306 +1,497 @@
 /* ============================================================
    Doctor Alliance · Monthly Client Impact Report — Editorial Edition
-   ------------------------------------------------------------
-   TO CREATE A NEW MONTHLY REPORT:
-   Edit ONLY the `clientData` object below, then open index.html.
-
-   The schema below is intentionally array-based (not fixed keys),
-   so you can add, remove, or reorder items freely per client and
-   per month — nothing about the layout needs to change. Any
-   section left empty (empty array, null amount, businessImpact
-   disabled, etc.) is automatically hidden.
    ============================================================ */
+:root{
+  --ink:        #1C1F1B;
+  --ink-soft:   #2A2E29;
+  --paper:      #F6F4EF;
+  --paper-deep: #EDE9E0;
+  --forest:     #2C4A3E;
+  --forest-soft:#3C6153;
+  --brass:      #9C7A3C;
+  --brass-light:#C9A667;
+  --cream:      #F3EFE4;
+  --slate:      #6B7268;
+  --slate-on-dark: #A8B0A4;
+  --line:       #DDD8CC;
+  --line-on-dark: rgba(243,239,228,0.16);
 
-const clientData = {
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-  clientName: "Meridian Family Physicians",
-  reportingPeriod: "July 2026",     // used for the browser tab title
-  heroLabel: "July in Review",      // the big line under "Doctor Alliance" in the hero
-  impactStatement: "Streamlining documentation, coordinating care, and supporting measurable operational impact.",
+  --wrap: 1080px;
+}
 
-  /* SECTION 2 — Month at a glance
-     Mark exactly one metric `primary: true` to make it the large
-     lead figure. Everything else renders at a shared secondary size.
-     `format` can be "number" or "percent". */
-  metrics: [
-    { label: "Orders Processed", value: 412, format: "number", primary: true },
-    { label: "Patients Supported", value: 268, format: "number" },
-    { label: "Documentation Accuracy", value: 99.2, format: "percent" },
-    { label: "Minutes Captured", value: 5140, format: "number" },
-    { label: "Physician Sign-Off Rate", value: 96.5, format: "percent" }
-  ],
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-  /* SECTION 3 — Behind the numbers */
-  operationalStory: {
-    narrative: "Across three facilities and nine physicians, Doctor Alliance managed the monthly documentation workflow end to end and completed 154 proactive follow-ups before anything came due.",
-    stats: [
-      { label: "Facilities coordinated", value: "3" },
-      { label: "Physicians supported", value: "9" },
-      { label: "Follow-ups completed", value: "154" },
-      { label: "Escalations resolved", value: "11" }
-    ]
-  },
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* SECTION 4 — Workflow journey (ordered; hides any stage left blank) */
-  workflow: [
-    { label: "Received", value: 438 },
-    { label: "Processed", value: 412 },
-    { label: "Sent for Signature", value: 401 },
-    { label: "Signed", value: 388 },
-    { label: "Completed", value: 379 }
-  ],
+.wrap{
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-  /* SECTION 5 — What we took off your team's plate */
-  valueDelivered: [
-    { title: "Coordination", description: "Agency communication and outstanding documentation management across all three locations." },
-    { title: "Workflow Management", description: "End-to-end order coordination from intake through physician sign-off." },
-    { title: "Proactive Follow-Up", description: "Outstanding documentation addressed before it became overdue." },
-    { title: "Physician Support", description: "Coordination on CPO care plan reviews across nine providers." },
-    { title: "Escalation Handling", description: "Workflow escalations flagged by front-office staff resolved same-week." },
-    { title: "Opportunity Identification", description: "Two under-enrolled patient panels flagged for expanded service." }
-  ],
-
-  /* SECTION 6 — Business impact (optional; set enabled:false to hide entirely) */
-  businessImpact: {
-    enabled: true,
-    title: "Business Impact",
-    amount: 18420,
-    amountLabel: "Billed Revenue Supported",
-    encounters: 214,
-    encountersLabel: "Billable Encounters",
-    codes: [
-      { code: "G0179", description: "Physician recertification", count: 92, amount: 4140 },
-      { code: "G0180", description: "Physician certification", count: 38, amount: 2280 },
-      { code: "G0181", description: "Care plan oversight, 30 min", count: 84, amount: 12000 }
-    ]
-  },
-
-  /* SECTION 7 — Monthly highlights (first item renders larger) */
-  highlights: [
-    "99.2% documentation accuracy maintained for the third consecutive month.",
-    "Physician sign-off turnaround improved across all nine providers.",
-    "Zero enrolled RPM patients went without a monitored reading this month.",
-    "Two new service opportunities identified for under-enrolled panels."
-  ],
-
-  /* SECTION 8 — Looking ahead */
-  nextMonthFocus: [
-    "Expand CPO opportunity identification across the two flagged panels",
-    "Improve physician sign-off turnaround for the newest onboarded providers",
-    "Review recurring workflow escalations at the Northgate location"
-  ],
-
-  footerNote: "Supporting clinical teams through operational coordination, documentation management, and measurable service impact."
-};
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 28px;
+}
+.eyebrow--light{ color: var(--brass-light); }
 
 /* ============================================================
-   Rendering — do not need to edit below this line
+   Controls
    ============================================================ */
+.controls{
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  gap: 10px;
+}
+.ctrl-btn{
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 9px 16px;
+  border-radius: 2px;
+  border: 1px solid rgba(28,31,27,0.18);
+  background: rgba(246,244,239,0.9);
+  backdrop-filter: blur(6px);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.ctrl-btn:hover{ border-color: var(--forest); }
+.ctrl-btn:focus-visible{ outline: 2px solid var(--forest); outline-offset: 2px; }
+.ctrl-btn--primary{
+  background: var(--forest);
+  border-color: var(--forest);
+  color: #fff;
+}
+.ctrl-btn--primary:hover{ background: var(--forest-soft); }
 
-const hasValue = (v) => v !== null && v !== undefined && v !== "" &&
-  !(Array.isArray(v) && v.length === 0);
-
-const fmtNumber = (n) => Number(n).toLocaleString("en-US");
-const fmtCurrency = (n) => Number(n).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-const fmtMetric = (m) => m.format === "percent" ? `${m.value}<span class="glance__unit">%</span>` : fmtNumber(m.value);
-
-function el(tag, className, html){
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (html !== undefined) node.innerHTML = html;
-  return node;
+/* ============================================================
+   SECTION 1 — HERO
+   ============================================================ */
+.hero{
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 120px 40px 80px;
+}
+.hero__inner{ max-width: 760px; margin: 0 auto; width: 100%; }
+.hero__brand{
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin: 0 0 28px;
+}
+.hero__title{
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.08;
+  margin: 0 0 32px;
+  letter-spacing: -0.01em;
+}
+.hero__client{ color: var(--slate-on-dark); font-style: italic; }
+.hero__statement{
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.65;
+  color: rgba(246,244,239,0.78);
+  max-width: 46ch;
+  margin: 0;
 }
 
-function renderHero(data){
-  document.title = `Doctor Alliance · ${data.clientName || "Client"} — ${data.reportingPeriod || ""}`;
-  document.getElementById("hero-review").textContent = data.heroLabel || "";
-  document.getElementById("hero-client").textContent = data.clientName || "";
-  const statementEl = document.getElementById("hero-statement");
-  if (hasValue(data.impactStatement)) {
-    statementEl.textContent = data.impactStatement;
-  } else {
-    statementEl.remove();
-  }
+.reveal{
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: reveal-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--d) * 0.14s + 0.1s);
+}
+@keyframes reveal-up{
+  to{ opacity: 1; transform: translateY(0); }
 }
 
-function renderGlance(metrics){
-  const grid = document.getElementById("glance-grid");
-  const valid = (metrics || []).filter(m => hasValue(m.value));
-  if (valid.length === 0){
-    document.getElementById("section-glance").remove();
-    return;
-  }
-  valid.forEach(m => {
-    const item = el("div", `glance__item${m.primary ? " glance__item--primary" : ""}`);
-    item.appendChild(el("div", "glance__value", fmtMetric(m)));
-    item.appendChild(el("div", "glance__label", m.label));
-    grid.appendChild(item);
-  });
+/* ============================================================
+   Scroll reveal (per-section, single subtle fade)
+   ============================================================ */
+.fade-section{
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-section.is-visible{
+  opacity: 1;
+  transform: translateY(0);
 }
 
-function renderStory(story){
-  if (!story || !hasValue(story.narrative)){
-    document.getElementById("section-story").remove();
-    return;
-  }
-  document.getElementById("story-narrative").textContent = story.narrative;
-  const statsWrap = document.getElementById("story-stats");
-  if (hasValue(story.stats)){
-    story.stats.forEach(s => {
-      const row = el("div", "story-stat");
-      row.appendChild(el("span", "story-stat__label", s.label));
-      row.appendChild(el("span", "story-stat__value", s.value));
-      statsWrap.appendChild(row);
-    });
-  } else {
-    statsWrap.remove();
-  }
+/* ============================================================
+   SECTION 2 — MONTH AT A GLANCE
+   ============================================================ */
+.glance{ padding: 110px 0 100px; }
+.glance__grid{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px 32px;
+}
+.glance__item{ grid-column: span 3; }
+.glance__item--primary{ grid-column: span 6; }
+.glance__value{
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.glance__item--primary .glance__value{ font-size: clamp(72px, 10vw, 132px); }
+.glance__item:not(.glance__item--primary) .glance__value{ font-size: clamp(40px, 5vw, 56px); }
+.glance__unit{ font-size: 0.5em; color: var(--slate); margin-left: 4px; }
+.glance__label{
+  margin-top: 10px;
+  font-size: 14.5px;
+  color: var(--slate);
+  max-width: 26ch;
+}
+.glance__item--primary .glance__label{ font-size: 16px; }
+
+@media (min-width: 640px){
+  .glance__item{ grid-column: span 2; }
 }
 
-function renderJourney(stages){
-  const track = document.getElementById("journey-track");
-  const valid = (stages || []).filter(s => hasValue(s.value));
-  if (valid.length === 0){
-    document.getElementById("section-journey").remove();
-    return;
-  }
-  valid.forEach(stage => {
-    const node = el("div", "journey-stage");
-    node.appendChild(el("div", "journey-stage__dot"));
-    node.appendChild(el("div", "journey-stage__value", fmtNumber(stage.value)));
-    node.appendChild(el("div", "journey-stage__label", stage.label));
-    track.appendChild(node);
-  });
+/* ============================================================
+   SECTION 3 — BEHIND THE NUMBERS
+   ============================================================ */
+.story{ padding: 100px 0; background: var(--paper-deep); }
+.story__layout{
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.story__text{
+  font-family: var(--font-display);
+  font-size: clamp(21px, 2.4vw, 28px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+.story__stats{
+  display: grid;
+  gap: 26px;
+  padding-top: 6px;
+}
+.story-stat{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.story-stat__label{ font-size: 13.5px; color: var(--slate); }
+.story-stat__value{
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--forest);
 }
 
-function renderPlate(items){
-  const list = document.getElementById("plate-list");
-  if (!hasValue(items)){
-    document.getElementById("section-plate").remove();
-    return;
-  }
-  items.forEach(item => {
-    const card = el("div", "plate-item");
-    card.appendChild(el("p", "plate-item__title", item.title));
-    card.appendChild(el("p", "plate-item__desc", item.description));
-    list.appendChild(card);
-  });
+@media (max-width: 780px){
+  .story__layout{ grid-template-columns: 1fr; gap: 40px; }
 }
 
-function renderImpact(impact){
-  const section = document.getElementById("section-impact");
-  if (!impact || !impact.enabled || !hasValue(impact.amount)){
-    section.remove();
-    return;
-  }
-  section.hidden = false;
-
-  document.getElementById("impact-title").textContent = impact.title || "Business Impact";
-  document.getElementById("impact-amount").textContent = fmtCurrency(impact.amount);
-
-  const subEl = document.getElementById("impact-sub");
-  const subParts = [];
-  if (hasValue(impact.amountLabel)) subParts.push(impact.amountLabel);
-  if (hasValue(impact.encounters)) subParts.push(`${fmtNumber(impact.encounters)} ${impact.encountersLabel || "encounters"}`);
-  if (subParts.length){
-    subEl.textContent = subParts.join(" · ");
-  } else {
-    subEl.remove();
-  }
-
-  const tableWrap = document.getElementById("impact-table-wrap");
-  if (hasValue(impact.codes)){
-    const table = el("table");
-    table.innerHTML = `
-      <thead><tr><th>Code</th><th>Description</th><th>Count</th><th>Amount</th></tr></thead>
-      <tbody>
-        ${impact.codes.map(c => `
-          <tr>
-            <td>${c.code}</td>
-            <td>${c.description || ""}</td>
-            <td>${fmtNumber(c.count)}</td>
-            <td>${fmtCurrency(c.amount)}</td>
-          </tr>`).join("")}
-      </tbody>`;
-    tableWrap.appendChild(table);
-  } else {
-    tableWrap.remove();
-  }
+/* ============================================================
+   SECTION 4 — WORKFLOW JOURNEY
+   ============================================================ */
+.journey{ padding: 110px 0 120px; overflow: hidden; }
+.journey__track{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 60px 0 50px;
+}
+.journey__track::before{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: var(--line);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+.journey-stage{
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.journey-stage:nth-child(even){ transform: translateY(-26px); }
+.journey-stage:nth-child(odd){ transform: translateY(26px); }
+.journey-stage__dot{
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--forest);
+  margin-bottom: 18px;
+  box-shadow: 0 0 0 6px var(--paper);
+}
+.journey-stage__value{
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: clamp(30px, 4vw, 44px);
+  color: var(--ink);
+  line-height: 1;
+}
+.journey-stage__label{
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--slate);
+  max-width: 14ch;
+}
+.journey-stage__arrow{
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  color: var(--line-strong, var(--line));
+  font-size: 13px;
 }
 
-function renderHighlights(items){
-  const grid = document.getElementById("highlights-grid");
-  if (!hasValue(items)){
-    document.getElementById("section-highlights").remove();
-    return;
+@media (max-width: 760px){
+  .journey__track{ flex-direction: column; align-items: flex-start; gap: 34px; padding: 20px 0; }
+  .journey__track::before{ left: 5px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .journey-stage{ flex-direction: row; align-items: center; gap: 16px; text-align: left; }
+  .journey-stage:nth-child(even), .journey-stage:nth-child(odd){ transform: none; }
+  .journey-stage__dot{ margin-bottom: 0; }
+  .journey-stage__label{ max-width: none; }
+}
+
+/* ============================================================
+   SECTION 5 — VALUE DELIVERED (What we took off your plate)
+   ============================================================ */
+.plate{ padding: 110px 0; background: var(--forest); color: var(--cream); }
+.plate__list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-on-dark);
+  border-top: 1px solid var(--line-on-dark);
+}
+.plate-item{
+  background: var(--forest);
+  padding: 34px 30px;
+}
+.plate-item__title{
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin: 0 0 12px;
+}
+.plate-item__desc{
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(243,239,228,0.86);
+  margin: 0;
+}
+
+@media (max-width: 780px){
+  .plate__list{ grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   SECTION 6 — BUSINESS IMPACT
+   ============================================================ */
+.impact{ padding: 110px 0; }
+.impact__layout{
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 60px;
+  align-items: start;
+}
+.impact__figure{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px 36px;
+  border-radius: 2px;
+}
+.impact__figure .eyebrow{ color: var(--brass-light); margin-bottom: 20px; }
+.impact__amount{
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: clamp(44px, 5vw, 60px);
+  line-height: 1;
+  color: var(--paper);
+}
+.impact__sub{
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: rgba(246,244,239,0.7);
+}
+.impact__table-wrap table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.impact__table-wrap th, .impact__table-wrap td{
+  text-align: left;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.impact__table-wrap th{
+  color: var(--slate);
+  font-weight: 600;
+  font-size: 12px;
+}
+.impact__table-wrap td:last-child, .impact__table-wrap th:last-child{
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--forest);
+  font-weight: 600;
+}
+
+@media (max-width: 780px){
+  .impact__layout{ grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   SECTION 7 — MONTHLY HIGHLIGHTS
+   ============================================================ */
+.highlights{ padding: 110px 0; background: var(--paper-deep); }
+.highlights__grid{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px;
+}
+.highlight-quote{
+  grid-column: span 3;
+  border-left: 2px solid var(--forest);
+  padding-left: 22px;
+}
+.highlight-quote:first-child{ grid-column: span 6; }
+.highlight-quote:first-child .highlight-quote__text{ font-size: clamp(22px, 2.6vw, 30px); }
+.highlight-quote__text{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (max-width: 780px){
+  .highlight-quote, .highlight-quote:first-child{ grid-column: 1 / -1; }
+}
+
+/* ============================================================
+   SECTION 8 — LOOKING AHEAD
+   ============================================================ */
+.ahead{ padding: 120px 0 130px; background: var(--ink); color: var(--paper); }
+.ahead__list{
+  list-style: none;
+  counter-reset: ahead-counter;
+  margin: 0;
+  padding: 0;
+  max-width: 720px;
+}
+.ahead__list li{
+  counter-increment: ahead-counter;
+  display: flex;
+  gap: 30px;
+  align-items: baseline;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.ahead__list li:first-child{ border-top: 1px solid var(--line-on-dark); }
+.ahead__list li::before{
+  content: counter(ahead-counter, decimal-leading-zero);
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 26px;
+  color: var(--brass-light);
+  font-weight: 500;
+}
+.ahead-text{
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgba(246,244,239,0.92);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.report-footer{
+  padding: 50px 40px 60px;
+  text-align: center;
+}
+.report-footer__brand{
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.report-footer__brand .dot{ color: var(--slate); margin: 0 4px; }
+.report-footer__note{
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--slate);
+  max-width: 52ch;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .reveal{ animation: none; opacity: 1; transform: none; }
+  .fade-section{ transition: none; opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   Print / PDF
+   ============================================================ */
+@media print{
+  @page{ size: A4; margin: 12mm; }
+  body{ background: #fff; }
+  .no-print{ display: none !important; }
+  .fade-section, .reveal{ opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  .hero{ min-height: 0; padding: 30px 0; }
+  .glance, .story, .journey, .plate, .impact, .highlights, .ahead{ padding: 30px 0; break-inside: avoid; }
+  .plate, .ahead, .hero, .impact__figure{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  items.forEach(text => {
-    const quote = el("div", "highlight-quote");
-    quote.appendChild(el("p", "highlight-quote__text", text));
-    grid.appendChild(quote);
-  });
+  .journey__track{ padding: 30px 0; }
+  .plate-item, .highlight-quote, .ahead__list li, .glance__item{ break-inside: avoid; }
 }
-
-function renderAhead(items){
-  const list = document.getElementById("ahead-list");
-  if (!hasValue(items)){
-    document.getElementById("section-ahead").remove();
-    return;
-  }
-  items.forEach(text => {
-    const li = document.createElement("li");
-    li.appendChild(el("span", "ahead-text", text));
-    list.appendChild(li);
-  });
-}
-
-function renderFooter(note){
-  const el = document.getElementById("footer-note");
-  if (hasValue(note)) {
-    el.textContent = note;
-  } else {
-    el.remove();
-  }
-}
-
-function renderReport(data){
-  renderHero(data);
-  renderGlance(data.metrics || []);
-  renderStory(data.operationalStory || {});
-  renderJourney(data.workflow || []);
-  renderPlate(data.valueDelivered || []);
-  renderImpact(data.businessImpact || {});
-  renderHighlights(data.highlights || []);
-  renderAhead(data.nextMonthFocus || []);
-  renderFooter(data.footerNote);
-}
-
-function initScrollReveal(){
-  const sections = document.querySelectorAll(".fade-section");
-  if (!("IntersectionObserver" in window)){
-    sections.forEach(s => s.classList.add("is-visible"));
-    return;
-  }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
-  sections.forEach(s => observer.observe(s));
-}
-
-function initControls(){
-  document.getElementById("btn-print").addEventListener("click", () => window.print());
-  // Browser-native "Save as PDF" is exposed through the print dialog's
-  // destination picker in every modern browser — no external library needed.
-  document.getElementById("btn-pdf").addEventListener("click", () => window.print());
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderReport(clientData);
-  initScrollReveal();
-  initControls();
-});
