@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Alliance · Monthly Client Impact Report</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="controls no-print">
+    <button id="btn-print" class="ctrl-btn" type="button">Print report</button>
+    <button id="btn-pdf" class="ctrl-btn ctrl-btn--primary" type="button">Download as PDF</button>
+  </div>
+
+  <main class="sheet" id="sheet">
+
+    <!-- HEADER -->
+    <header class="masthead">
+      <div class="masthead__top">
+        <span class="masthead__brand">Doctor Alliance</span>
+        <span class="masthead__period" id="hdr-period"></span>
+      </div>
+      <div class="masthead__rule"></div>
+      <div class="masthead__title-block">
+        <p class="masthead__eyebrow">Monthly Client Impact Report</p>
+        <h1 class="masthead__client" id="hdr-client"></h1>
+        <p class="masthead__headline" id="hdr-headline"></p>
+      </div>
+    </header>
+
+    <!-- EXECUTIVE SNAPSHOT -->
+    <section class="section" id="section-kpis">
+      <h2 class="section__title">Executive snapshot</h2>
+      <div class="kpi-grid" id="kpi-grid"></div>
+    </section>
+
+    <!-- OPERATIONAL PERFORMANCE -->
+    <section class="section" id="section-ops">
+      <h2 class="section__title">Operational performance</h2>
+      <div class="ops-grid" id="ops-grid"></div>
+    </section>
+
+    <!-- WORKFLOW ACTIVITY -->
+    <section class="section" id="section-workflow">
+      <h2 class="section__title">Workflow activity</h2>
+      <div class="workflow-rail" id="workflow-rail"></div>
+    </section>
+
+    <!-- VALUE DELIVERED -->
+    <section class="section" id="section-value">
+      <h2 class="section__title">Value delivered this month</h2>
+      <ul class="value-list" id="value-list"></ul>
+    </section>
+
+    <!-- REVENUE (conditional) -->
+    <section class="section" id="section-revenue" hidden>
+      <h2 class="section__title" id="revenue-title">Revenue &amp; services</h2>
+      <div class="revenue-block">
+        <div class="revenue-summary" id="revenue-summary"></div>
+        <div class="revenue-codes" id="revenue-codes"></div>
+        <div class="revenue-trend" id="revenue-trend"></div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section class="section" id="section-highlights">
+      <h2 class="section__title">Monthly highlights</h2>
+      <div class="highlight-grid" id="highlight-grid"></div>
+    </section>
+
+    <!-- NEXT MONTH FOCUS -->
+    <section class="section" id="section-next">
+      <h2 class="section__title">Next month focus</h2>
+      <ol class="next-list" id="next-list"></ol>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="report-footer">
+      <p class="report-footer__brand">Doctor Alliance <span class="dot">·</span> Confidential</p>
+      <p class="report-footer__note">Supporting clinical teams through operational coordination, documentation management, and measurable service impact.</p>
+    </footer>
+
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>
